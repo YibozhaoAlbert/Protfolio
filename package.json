@@ -1,0 +1,11 @@
+{
+  "name": "protfolio",
+  "version": "1.0.0",
+  "description": "Protfolio for DECO2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Albert Zhao",
+  "license": "ISC"
+}

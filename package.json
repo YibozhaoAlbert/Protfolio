@@ -2,13 +2,19 @@
   "name": "protfolio",
   "version": "1.0.0",
   "description": "Protfolio for DECO2017",
-  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "prestart": "parcal build ./public/index.html",
+    "dev": "parcel serve ./public/index.html"
   },
   "author": "Albert Zhao",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "scss": "^0.2.4"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3"
   }
 }

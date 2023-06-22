@@ -83,3 +83,144 @@ function drawWave(n, rows) {
   // Done!
   endShape();
 }
+let refreshButton = document.getElementById("reloadImage");
+let form = document.getElementById("noteForm");
+let bigButton = document.getElementById("createButton");
+let firstInput = document.getElementById("firstPage");
+let libraryPanel = document.getElementById("library");
+let cancelButton = document.getElementById("cancel");
+let icon = document.getElementById("icon");
+let dname = document.getElementById("displayName");
+let dcate = document.getElementById("displayCate");
+let dsa = document.getElementById("displaySa");
+let dchar = document.getElementById("displayChar");
+let dimg = document.getElementById("displayImg");
+let dnote = document.getElementById("displayNote");
+let dhistory = document.getElementById("displayhistory");
+let popup = document.getElementById("popup");
+let closebutton = document.getElementById("displayClose");
+let noteInformation = [];
+function addNote(name, category, sashimi, img, notes, characteristics, history) {
+  let note = {
+    name,
+    category,
+    notes,
+    id: Date.now(),
+    date: new Date().toISOString(),
+    sashimi,
+    img,
+    characteristics,
+    history
+  }
+  noteInformation.push(note);
+  console.log(noteInformation);
+}
+
+function storageCheck(){
+  noteInformation = JSON.parse(localStorage.getItem('notes'));
+  if (noteInformation.length == 0) {
+    libraryPanel.style.display = "none";
+    firstInput.style.display = 'grid';
+  }else {
+    library();
+  }
+};
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}
+function library(){
+  removeAllChildNodes(libraryPanel);
+  let noteArray = JSON.parse(localStorage.getItem('notes'));
+  noteArray.forEach((singleNote) => {
+    let card = document.createElement("div");
+    card.setAttribute("class", "card");
+    let img = document.createElement("img");
+    img.setAttribute("src", singleNote.img);
+    let name = document.createElement('h2');
+    name.textContent = singleNote.name;
+    let cate = document.createElement("p");
+    cate.innerHTML = singleNote.category;
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete Note";
+    deleteButton.addEventListener('click', function(event){
+      noteArray.splice(noteArray.indexOf(singleNote), 1);
+      noteInformation = noteArray
+      localStorage.setItem('notes', JSON.stringify(noteInformation));
+      card.remove();
+      storageCheck();
+    });
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(cate);
+    card.appendChild(deleteButton);
+    card.addEventListener('click', function(event){
+      popup.style.display = "grid";
+      dname.innerHTML = singleNote.name;
+      dcate.innerHTML = singleNote.category;
+      dsa.innerHTML = singleNote.sashimi;
+      dchar.innerHTML = singleNote.characteristics;
+      dimg.src = singleNote.img;
+      dnote.innerHTML = singleNote.notes;
+      dhistory.innerHTML = singleNote.history;
+    })
+    libraryPanel.appendChild(card);
+    libraryPanel.style.display = "grid";
+    });
+  let card = document.createElement("div");
+  card.setAttribute("class", "card");
+  let img = document.createElement("img");
+  img.setAttribute("src", icon.src);
+  let word = document.createElement("p");
+  word.innerHTML = "Create new Note";
+  card.appendChild(img);
+  card.appendChild(word);
+  libraryPanel.appendChild(card);
+  card.addEventListener('click', function(event){
+    libraryPanel.style.display = "none";
+    form.style.display = "block";
+  });
+};
+
+refreshButton.addEventListener('click', function(){
+  let imageLeft = document.getElementById("leftImg");
+  let url = document.getElementById('img').value;
+  imageLeft.src = url;
+});
+
+
+form.addEventListener('submit', function(event){
+  event.preventDefault();
+  addNote(
+    form.elements.name.value, 
+    form.elements.category.value, 
+    form.elements.sashimi.value,
+    form.elements.img.value,
+    form.elements.note.value,
+    form.elements.chara.value,
+    form.elements.history.value
+  );
+  form.reset();
+  form.style.display = "none";
+  localStorage.setItem('notes', JSON.stringify(noteInformation));
+  library();
+});
+
+
+bigButton.addEventListener('click', function(){
+  firstInput.style.display = "none";
+  form.style.display = "block";
+});
+
+cancelButton.addEventListener('click', function(event){
+  form.reset();
+  form.style.display = "none";
+  storageCheck();
+});
+
+closebutton.addEventListener("click", function(event){
+  popup.style.display = "none";
+});
+storageCheck();

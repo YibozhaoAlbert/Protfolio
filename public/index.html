@@ -22,15 +22,96 @@
       <div class="block"></div>
     </div>
     <div class="container">
-      <div class="popup">
-      </div>
-      <div class="firstInput">
-        <div class="title">Create your first note here</div>
-          <div class="bigButton">
-            <svg></svg>
-            <h3>Create new code</h3>
+      <div class="popup" id="popup">
+        <div class="leftPart" id="displayLeft">
+          <div class="displayName">
+            <h2>Name: </h2>
+            <h4 id="displayName">Sample Name</h4>
+          </div>
+          <div class="displayCate">
+            <h3>Category: </h3>
+            <h4 id="displayCate">Sample Category</h3>
+          </div>
+          <div class="displaySa">
+            <h3>Sashimi: </h3>
+            <h4 id="displaySa"></h4>
+          </div>
+          <div class="chara">
+            <h3>Characteristics: </h3>
+            <p id="displayChar">samplenoteakds dsads dsadas</p>
           </div>
         </div>
+        <div class="rightPart" id="displayRight">
+          <img src="img/placeholder.jpg" alt="" id="displayImg">
+          <div class="notedisplay">
+          <h3>Note</h3>
+          <p id="displayNote">samplenoteakds dsads dsadas</p>
+          </div>
+        </div>
+        <div class="bottomPart" id="displayBottom">
+          <h3>History</h3>
+          <p id="displayhistory"></p>
+          <button id="displayClose">close</button>
+        </div>
+      </div>
+      <div class="firstInput" id="firstPage">
+        <div class="firstTitle">Create your first note here</div>
+          <div class="bigButton" id="createButton">
+            <img src="img/new_note.svg" alt="icon of create new note" id="icon">
+            <h3>Create new note</h3>
+          </div>
+      </div>
+      <form id="noteForm">
+        <div class="quere">
+          <div class="leftPart">
+            <div class="noteImg">
+              <img src="img/placeholder.jpg" alt="blank image" id="leftImg">
+              <label for="img">Image URL</label>
+              <input type="txt" name="img" id="img">
+              <button type="button" id="reloadImage">Load Image</button>
+            </div>
+            <div class="notes">
+              <label for="note">Notes</label>
+              <textarea name="note" id="note"></textarea>
+            </div>
+          </div>
+          <div class="rightPart">
+            <div class="information">
+              <div class="name">
+                <label for="name">Name</label>
+                <input type="txt" name="name" id="name" required>
+              </div>
+              <div class="category">
+                <label for="category">Category</label>
+                <input type="txt" name="category" id="category" required>
+              </div>
+              <div class="sashimi">
+                <p>Shashimi</p>
+                <input type="radio" name="sashimi" id="yes" value="Yes">
+                <label for="yes">Yes</label>
+                <input type="radio" name="sashimi" id="no" value="No">
+                <label for="no">No</label>
+              </div>
+            </div>
+            <div class="chara">
+              <label for="chara">Characteristics</label>
+              <textarea name="chara" id="chara" rows="8" required></textarea>
+            </div>
+          </div>
+          <div class="bottomPart">
+            <div class="history">
+              <label for="history">History</label>
+              <textarea name="history" id="history" rows="2"></textarea>
+            </div>
+            <div class="buttons">
+              <input type="button" id="cancel" value="Cancel">
+              <input type="submit" value="Submit" id="submit">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="library" id="library">
+
       </div>
     </div>
   </div>
